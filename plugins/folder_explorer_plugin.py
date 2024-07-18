@@ -1,3 +1,5 @@
+import time
+
 from PySide6.QtWidgets import QTreeView, QFileSystemModel, QVBoxLayout
 from main import PluginBase
 
@@ -17,3 +19,5 @@ class FolderExplorerPlugin(PluginBase):
 
 # Rename the class to "Plugin" to ensure it matches the loader's expectation.
 Plugin = FolderExplorerPlugin
+#wait 10s
+time.sleep(10)

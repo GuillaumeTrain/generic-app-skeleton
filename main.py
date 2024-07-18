@@ -1,14 +1,24 @@
 import asyncio
 import sys
 
-from PySide6.QtCore import QThread, Signal, Slot
+from PySide6.QtCore import QThread, Signal, Slot, Qt
 from PySide6.QtWidgets import QSplashScreen, QProgressBar, QMainWindow, QApplication
 from PySide6.QtGui import QPixmap
 import requests
 import importlib
 import os
 
+class SplashScreen(QSplashScreen):
+    def __init__(self):
+        #init qpixmap
+        qpix = QPixmap("splash.png")
+        super().__init__(qpix)
+        self.setStyleSheet("background-color: black;")
+        self.progressBar = QProgressBar(self)
+        self.progressBar.setGeometry(10, self.height() - 30, self.width() - 20, 20)
 
+    def update_progress(self, value):
+        self.progressBar.setValue(value)
 
 
 class AsyncWorker(QThread):
@@ -32,7 +42,7 @@ async def long_running_task():
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("Programme Modulaire")
+        self.setWindowTitle("SimplExe")
         self.setGeometry(100, 100, 800, 600)
         self.start_async_task()
 
@@ -45,14 +55,7 @@ class MainWindow(QMainWindow):
     def on_task_complete(self, result):
         print(result)
 
-class SplashScreen(QSplashScreen):
-    def __init__(self):
-        super().__init__(QPixmap("splash.png"))
-        self.progressBar = QProgressBar(self)
-        self.progressBar.setGeometry(10, self.height() - 30, self.width() - 20, 20)
 
-    def update_progress(self, value):
-        self.progressBar.setValue(value)
 
 class PluginBase:
     def __init__(self, name):
