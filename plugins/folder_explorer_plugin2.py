@@ -4,7 +4,7 @@ from PySide6.QtWidgets import QTreeView, QFileSystemModel, QVBoxLayout
 from core.plugin_loader import PluginBase
 
 class Plugin(PluginBase):
-    def __init__(self,classname ="FolderExplorerPlugin", name="Folder Explorer Plugin", version="0.0.1"):
+    def __init__(self,classname ="FolderExplorerPlugin2", name="Folder Explorer Plugin 2", version="0.0.1"):
         super().__init__(classname,name, version)
 
     def start(self, parent_layout):
